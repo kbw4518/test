@@ -1,0 +1,31 @@
+name: Multica Integration Check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run tests
+        run: node --test
+      - name: Wait for observation
+        run: sleep 20
+      - name: Controlled failure
+        shell: bash
+        run: |
+          if [ -f FAIL_CI ]; then
+            echo "CI intentionally failed: remove FAIL_CI to restore success"
+            exit 1
+          fi
