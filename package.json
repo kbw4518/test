@@ -1,0 +1,14 @@
+{
+  "name": "multica-github-integration-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A small todo project for testing Multica and GitHub integration.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node demo.js",
+    "test": "node --test"
+  }
+}
